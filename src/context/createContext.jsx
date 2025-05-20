@@ -13,7 +13,7 @@ export const TodoProvider = (props) => {
   });
   const [inputValue, setInputValue] = useState('');
   const [searchTodo, setSearchTodo] = useState('');
-
+  
   {
     /* Сохранение в localStorage */
   }
@@ -53,9 +53,13 @@ export const TodoProvider = (props) => {
     setTodos(newTodos);
   };
 
+  {
+    /* Поиск задачи */
+  }
   const handleSearch = (e) => {
     setSearchTodo(e.target.value);
   };
+
   return (
     <TodoContext.Provider
       value={{
