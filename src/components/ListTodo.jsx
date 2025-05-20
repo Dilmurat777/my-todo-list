@@ -4,14 +4,15 @@ import { useContext } from 'react';
 import NoFind from "../assets/find.png"
 
 export default function ListTodo() {
-  const { todos, deleteTodo } = useContext(TodoContext);
+  const { todos, deleteTodo, searchTodo } = useContext(TodoContext);
   console.log(todos);
+  const filteredTodos = todos.filter((todo) => todo.title.toLowerCase().includes(searchTodo.toLowerCase()));
 
   return (
     <div className="w-[525px] mt-5">
       {
         todos.length > 0 ? ( <ul className="flex flex-col gap-5 mt-3 w-full">
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <li key={todo.id} className="flex flex-row gap-2 items-center justify-between w-full border-b-primary border-b-2 p-3">
             <div className="flex flex-row gap-2">
               <input type="checkbox" />

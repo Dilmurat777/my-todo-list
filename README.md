@@ -1,5 +1,7 @@
 # ToDo List App
 
+# link figma todo list (https://www.figma.com/design/GiWTKcuCrB2RxF3VQo8y4i/Simple-ToDo-List-Design--Community-?node-id=18-475&t=wxR9hOyL1NN1ZKa1-0)
+
 ## 📌 Обзор
 Это приложение ToDo-лист с поддержкой CRUD-операций, фильтрацией, темной/светлой темой, анимацией, хранением в localStorage и адаптивным дизайном.
 
@@ -35,7 +37,7 @@ Redux Toolkit — лучше масштабируется, особенно ес
 # Используемые технологии
 React Vite
 
-Redux Toolkit
+Context
 
 Tailwind CSS
 
