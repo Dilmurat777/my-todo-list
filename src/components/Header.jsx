@@ -7,7 +7,7 @@ import { TodoContext } from '../context/createContext';
 export default function Header() {
   const { theme, toggleTheme } = useContext(TodoContext);
   return (
-    <div className="flex flex-row gap-4 mt-3 w-full items-center">
+    <div className="flex flex-row gap-4 mt-3 w-full items-center mt-5">
       <SearchTodo />
       <FilterTodo />
       {theme === 'dark' ? (

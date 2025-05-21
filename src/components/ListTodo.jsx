@@ -10,7 +10,6 @@ export default function ListTodo() {
 
   const { todos, deleteTodo, searchTodo, setTodos, toggleStatus, statusFilter, theme } =
     useContext(TodoContext);
-  console.log(todos);
   const filteredTodos = todos.filter((todo) => {
     const matchesSearch = todo.title.toLowerCase().includes(searchTodo.toLowerCase());
     const matchesStatus = statusFilter === 'all' || todo.status === statusFilter;
@@ -36,17 +35,21 @@ export default function ListTodo() {
           {filteredTodos.map((todo) => (
             <li
               key={todo.id}
-              className="flex flex-row gap-2 items-center justify-between w-full border-b-primary border-b-2 p-2">
+              className="flex flex-row gap-2 items-center justify-between w-full border-b-primary border-b-2 p-2 hover:scale-105 transition-all duration-100">
               <div className="flex flex-row gap-2">
                 {editingId === todo.id ? (
                   <input
-                    className={`w-[300px] outline-none ${theme === 'light' ? 'text-black' : 'text-white bg-dark'}`}
+                    className={`w-[300px] outline-none ${
+                      theme === 'light' ? 'text-black' : 'text-white bg-dark'
+                    }`}
                     type="text"
                     value={editedTitle}
                     onChange={(e) => setEditedTitle(e.target.value)}
                   />
                 ) : (
-                  <p>{todo.title}</p>
+                  <p className={`font-medium ${todo.status === 'completed' ? 'line-through' : ''}`}>
+                    {todo.title}
+                  </p>
                 )}
               </div>
               <div className="flex flex-row gap-2">
@@ -61,11 +64,15 @@ export default function ListTodo() {
                       setEditingId(todo.id);
                       setEditedTitle(todo.title);
                     }}>
-                    <Pencil className="cursor-pointer text-light-gray hover:text-primary" />
+                    <Pencil className="cursor-pointer text-light-gray hover:text-primary hover:transform hover:scale-105 duration-100" />
                   </button>
                 )}
-                <button onClick={() => { deleteTodo(todo.id);  toast.success('Задача удалена!')}}>
-                  <Trash2 className="cursor-pointer text-light-gray hover:text-red-700" />
+                <button
+                  onClick={() => {
+                    deleteTodo(todo.id);
+                    toast.success('Задача удалена!');
+                  }}>
+                  <Trash2 className="cursor-pointer text-light-gray hover:text-red-700 hover:transform hover:scale-105 duration-100" />
                 </button>
               </div>
             </li>

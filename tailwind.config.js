@@ -10,6 +10,7 @@ export default {
         'light-gray': '#CDCDCD',
         'placeholder': '#C3C1E5',
         'dark': '#252525',
+        'textWhite': '#F7F7F7',
       }
     },
     fontFamily: {

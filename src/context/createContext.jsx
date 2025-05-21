@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-
+import { v4 as uuidv4 } from 'uuid';
 export const TodoContext = createContext();
 
 export const TodoProvider = (props) => {
@@ -23,20 +23,17 @@ export const TodoProvider = (props) => {
   });
 
   {
-    /* Сохранение в localStorage */
+    /* useEffect: Переключение темы & сохранение todos в localStorage */
   }
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
-
-  useEffect(() => {
     localStorage.setItem('theme', theme);
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
-  }, [theme]);
+  }, [theme, todos]);
 
   {
     /* Добавление задачи */
@@ -52,7 +49,7 @@ export const TodoProvider = (props) => {
     if (isDuplicate) return toast.error('This todo already exists');
     toast.success('Задача добавлена!');
     const newTodos = {
-      id: new Date().getTime(),
+      id: uuidv4(),
       title: inputValue,
       status: 'new',
     };
