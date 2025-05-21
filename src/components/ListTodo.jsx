@@ -2,12 +2,13 @@ import { Pencil, Trash2 } from 'lucide-react';
 import { TodoContext } from '../context/createContext';
 import { useContext, useState } from 'react';
 import NoFind from '../assets/find.png';
+import toast from 'react-hot-toast';
 
 export default function ListTodo() {
   const [editingId, setEditingId] = useState(null);
   const [editedTitle, setEditedTitle] = useState('');
 
-  const { todos, deleteTodo, searchTodo, setTodos, toggleStatus, statusFilter } =
+  const { todos, deleteTodo, searchTodo, setTodos, toggleStatus, statusFilter, theme } =
     useContext(TodoContext);
   console.log(todos);
   const filteredTodos = todos.filter((todo) => {
@@ -35,10 +36,11 @@ export default function ListTodo() {
           {filteredTodos.map((todo) => (
             <li
               key={todo.id}
-              className="flex flex-row gap-2 items-center justify-between w-full border-b-primary border-b-2 p-3">
+              className="flex flex-row gap-2 items-center justify-between w-full border-b-primary border-b-2 p-2">
               <div className="flex flex-row gap-2">
                 {editingId === todo.id ? (
                   <input
+                    className={`w-[300px] outline-none ${theme === 'light' ? 'text-black' : 'text-white bg-dark'}`}
                     type="text"
                     value={editedTitle}
                     onChange={(e) => setEditedTitle(e.target.value)}
@@ -59,11 +61,11 @@ export default function ListTodo() {
                       setEditingId(todo.id);
                       setEditedTitle(todo.title);
                     }}>
-                    <Pencil className="cursor-pointer text-light-gray" />
+                    <Pencil className="cursor-pointer text-light-gray hover:text-primary" />
                   </button>
                 )}
-                <button onClick={() => deleteTodo(todo.id)}>
-                  <Trash2 className="cursor-pointer text-light-gray" />
+                <button onClick={() => { deleteTodo(todo.id);  toast.success('Задача удалена!')}}>
+                  <Trash2 className="cursor-pointer text-light-gray hover:text-red-700" />
                 </button>
               </div>
             </li>

@@ -15,12 +15,28 @@ export const TodoProvider = (props) => {
   const [searchTodo, setSearchTodo] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
 
+  const [theme, setTheme] = useState(() => {
+    if (localStorage.theme) {
+      return localStorage.theme;
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+
   {
     /* Сохранение в localStorage */
   }
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
 
   {
     /* Добавление задачи */
@@ -61,20 +77,31 @@ export const TodoProvider = (props) => {
     setSearchTodo(e.target.value);
   };
 
-const toggleStatus = (id) => {
-  const newTodos = todos.map((todo) => {
-    if (todo.id === id) {
-      let newStatus;
-      if (todo.status === 'new') newStatus = 'completed';
-      else if (todo.status === 'completed') newStatus = 'uncompleted';
-      else newStatus = 'new';
-      return { ...todo, status: newStatus };
-    }
-    return todo;
-  });
-  setTodos(newTodos);
-};
+  {
+    /* Изменение статуса задачи */
+  }
 
+  const toggleStatus = (id) => {
+    const newTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        let newStatus;
+        if (todo.status === 'new') newStatus = 'completed';
+        else if (todo.status === 'completed') newStatus = 'uncompleted';
+        else newStatus = 'new';
+        return { ...todo, status: newStatus };
+      }
+      return todo;
+    });
+    setTodos(newTodos);
+  };
+
+  {
+    /* Изменение темы */
+  }
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   return (
     <TodoContext.Provider
@@ -90,6 +117,8 @@ const toggleStatus = (id) => {
         toggleStatus,
         statusFilter,
         setStatusFilter,
+        theme,
+        toggleTheme,
       }}>
       {props.children}
     </TodoContext.Provider>

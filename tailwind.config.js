@@ -6,8 +6,10 @@ export default {
     extend: {
       colors: {
         'primary': '#6C63FF',
+        'darkPrimary': '#534CC2',
         'light-gray': '#CDCDCD',
         'placeholder': '#C3C1E5',
+        'dark': '#252525',
       }
     },
     fontFamily: {

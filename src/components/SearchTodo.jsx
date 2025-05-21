@@ -1,19 +1,25 @@
-import { Search, Sun } from 'lucide-react';
-import FilterTodo from './FilterTodo';
+import { Search } from 'lucide-react';
 import { useContext } from 'react';
 import { TodoContext } from '../context/createContext';
-import ThemeSwitcher from './ThemeSwitcher';
 
 export default function SearchTodo() {
+  const { theme } = useContext(TodoContext);
   const { searchTodo, handleSearch } = useContext(TodoContext);
   return (
-    <div className="flex flex-row gap-4 mt-3 w-full items-center">
-      <div className="w-[500px] border rounded-lg flex items-center px-2 border-primary">
-        <input type="text" className="p-2 outline-none w-full" placeholder="Search" value={searchTodo} onChange={handleSearch}/>
-        <Search className='cursor-pointer text-primary'/>
-      </div>
-      <FilterTodo />
-      <ThemeSwitcher />
+    <div
+      className={`w-[500px] border rounded-lg flex items-center px-2 ${
+        theme === 'dark' ? 'border-white' : 'border-primary'
+      }`}>
+      <input
+        type="text"
+        className={`p-2 outline-none w-full ${
+          theme === 'dark' ? 'text-white bg-dark' : 'text-black'
+        }`}
+        placeholder="Search note..."
+        value={searchTodo}
+        onChange={handleSearch}
+      />
+      <Search className={theme === 'light' ? 'text-primary' : 'text-white'} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { TodoContext } from '../context/createContext';
 
 export default function FormTodo() {
-  const { handleSubmit, inputValue, setInputValue } = useContext(TodoContext);
+  const { handleSubmit, inputValue, setInputValue, theme } = useContext(TodoContext);
 
   const handleInput = (e) => {
     setInputValue(e.target.value);
@@ -14,7 +14,7 @@ export default function FormTodo() {
         onSubmit={handleSubmit}
         className="flex flex-row gap-2 mt-3 w-full items-center justify-between">
         <input
-          className="border-2 border-primary rounded-lg p-2 outline-none w-full placeholder:text-placeholder"
+          className={`border-2 border-primary rounded-lg p-2 outline-none w-full placeholder:text-placeholder ${theme === 'light' ? 'bg-white' : 'bg-dark border-gray-500 placeholder:text-gray-500'}`}
           type="text"
           placeholder="Input your note..."
           value={inputValue}
