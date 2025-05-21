@@ -2,6 +2,7 @@ import { Search, Sun } from 'lucide-react';
 import FilterTodo from './FilterTodo';
 import { useContext } from 'react';
 import { TodoContext } from '../context/createContext';
+import ThemeSwitcher from './ThemeSwitcher';
 
 export default function SearchTodo() {
   const { searchTodo, handleSearch } = useContext(TodoContext);
@@ -12,7 +13,7 @@ export default function SearchTodo() {
         <Search className='cursor-pointer text-primary'/>
       </div>
       <FilterTodo />
-      <Sun className="cursor-pointer bg-primary p-2  w-11 h-11 rounded-lg text-white" />
+      <ThemeSwitcher />
     </div>
   );
 }

@@ -13,7 +13,8 @@ export const TodoProvider = (props) => {
   });
   const [inputValue, setInputValue] = useState('');
   const [searchTodo, setSearchTodo] = useState('');
-  
+  const [statusFilter, setStatusFilter] = useState('all');
+
   {
     /* Сохранение в localStorage */
   }
@@ -37,7 +38,7 @@ export const TodoProvider = (props) => {
     const newTodos = {
       id: new Date().getTime(),
       title: inputValue,
-      completed: false,
+      status: 'new',
     };
     setTodos([...todos, newTodos]);
 
@@ -60,6 +61,21 @@ export const TodoProvider = (props) => {
     setSearchTodo(e.target.value);
   };
 
+const toggleStatus = (id) => {
+  const newTodos = todos.map((todo) => {
+    if (todo.id === id) {
+      let newStatus;
+      if (todo.status === 'new') newStatus = 'completed';
+      else if (todo.status === 'completed') newStatus = 'uncompleted';
+      else newStatus = 'new';
+      return { ...todo, status: newStatus };
+    }
+    return todo;
+  });
+  setTodos(newTodos);
+};
+
+
   return (
     <TodoContext.Provider
       value={{
@@ -71,6 +87,9 @@ export const TodoProvider = (props) => {
         deleteTodo,
         searchTodo,
         handleSearch,
+        toggleStatus,
+        statusFilter,
+        setStatusFilter,
       }}>
       {props.children}
     </TodoContext.Provider>

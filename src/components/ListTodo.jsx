@@ -7,15 +7,18 @@ export default function ListTodo() {
   const [editingId, setEditingId] = useState(null);
   const [editedTitle, setEditedTitle] = useState('');
 
-  const { todos, deleteTodo, searchTodo, setTodos } = useContext(TodoContext);
+  const { todos, deleteTodo, searchTodo, setTodos, toggleStatus, statusFilter } =
+    useContext(TodoContext);
   console.log(todos);
-  const filteredTodos = todos.filter((todo) =>
-    todo.title.toLowerCase().includes(searchTodo.toLowerCase()),
-  );
+  const filteredTodos = todos.filter((todo) => {
+    const matchesSearch = todo.title.toLowerCase().includes(searchTodo.toLowerCase());
+    const matchesStatus = statusFilter === 'all' || todo.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
   const handleSave = (id) => {
     const updatedTodos = todos.map((todo) => {
-      if(!editedTitle.trim()) return todo
+      if (!editedTitle.trim()) return todo;
       if (todo.id === id) {
         return { ...todo, title: editedTitle };
       }
@@ -27,7 +30,7 @@ export default function ListTodo() {
 
   return (
     <div className="w-[525px] mt-5">
-      {todos.length > 0 ? (
+      {filteredTodos.length > 0 ? (
         <ul className="flex flex-col gap-5 mt-3 w-full">
           {filteredTodos.map((todo) => (
             <li
@@ -41,25 +44,24 @@ export default function ListTodo() {
                     onChange={(e) => setEditedTitle(e.target.value)}
                   />
                 ) : (
-                  <>
-                    {' '}
-                    <input type="checkbox" />
-                    <p>{todo.title}</p>
-                  </>
+                  <p>{todo.title}</p>
                 )}
               </div>
               <div className="flex flex-row gap-2">
-                {
-                  editingId === todo.id ? (
-                    <button onClick={() => handleSave(todo.id)}>
-                      Save
-                    </button>
-                  ) : (
-                      <button onClick={() => { setEditingId(todo.id); setEditedTitle(todo.title); }}>
-                      <Pencil className="cursor-pointer text-light-gray" />
-                    </button>
-                  )
-                }
+                <button onClick={() => toggleStatus(todo.id)}>
+                  <p>{todo.status}</p>
+                </button>
+                {editingId === todo.id ? (
+                  <button onClick={() => handleSave(todo.id)}>Save</button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setEditingId(todo.id);
+                      setEditedTitle(todo.title);
+                    }}>
+                    <Pencil className="cursor-pointer text-light-gray" />
+                  </button>
+                )}
                 <button onClick={() => deleteTodo(todo.id)}>
                   <Trash2 className="cursor-pointer text-light-gray" />
                 </button>

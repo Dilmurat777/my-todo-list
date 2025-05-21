@@ -11,7 +11,7 @@ export default function App() {
   return (
     <div className="App">
       <div className="container max-w-3xl mx-auto px-4 flex flex-col items-center relative h-screen">
-        <h1 className="text-2xl font-bold mt-5 uppercase">TodoList</h1>
+        <h1 className="text-2xl font-bold mt-5 uppercase">📋 TodoList</h1>
         <SearchTodo />
         <ListTodo />
 
