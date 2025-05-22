@@ -7,7 +7,7 @@ export default function ModalWIndow() {
   return (
     <div>
       {/* Кнопка Add */}
-      <div className="absolute bottom-8 right-8 z-10">
+      <div className="absolute top-[480px] right-10 z-10">
         <button
           onClick={() => setActive(true)}
           className="bg-primary text-white w-12 h-12 flex items-center justify-center rounded-full hover:bg-darkPrimary">

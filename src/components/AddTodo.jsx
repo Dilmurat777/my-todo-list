@@ -11,10 +11,10 @@ export default function AddTodo({ active, setActive }) {
 
   return (
     <div
-      className={`relative top-0 right-0 rounded-xl px-8 ${
+      className={`relative top-[-30px] right-0 rounded-xl px-8 ${
         theme === 'light' ? 'bg-white' : 'bg-dark'
       }`}>
-      <div className="sm:w-[440px] h-[289px] mt-2" onClick={(e) => e.stopPropagation()}>
+      <div className="sm:w-[440px] sm:h-[289px] w-[260px] h-[150px] mt-2" onClick={(e) => e.stopPropagation()}>
         <h2
           className={`font-bold text-center uppercase ${
             theme === 'light' ? 'text-black' : 'text-white'

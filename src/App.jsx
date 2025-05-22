@@ -7,6 +7,7 @@ import { TodoContext } from './context/createContext';
 import Header from './components/Header';
 import ModalWIndow from './components/ModalWIndow';
 import { motion } from 'framer-motion';
+import Footer from './components/Footer';
 
 
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
   return (
     <div className={`App ${theme === 'light' ? 'bg-white' : 'bg-dark text-textWhite'}`}>
       <div
-        className={`container max-w-3xl mx-auto px-4 flex flex-col items-center relative h-screen`}>
+        className={`container max-w-3xl mx-auto px-4 flex flex-col items-center relative h-full`}>
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 10 }}
@@ -26,6 +27,7 @@ export default function App() {
         <ModalWIndow />
         <Toaster position="top-center" />
       </div>
+        <Footer />
     </div>
   );
 }
