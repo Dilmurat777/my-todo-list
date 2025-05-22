@@ -1,11 +1,14 @@
+import { useContext } from 'react';
 import GitHub from '../assets/icons/GitHub';
+import { TodoContext } from '../context/createContext';
 import Linkedin from './../assets/icons/Linkedin';
 import WhatsApp from './../assets/icons/WhatsApp';
 import { motion } from 'framer-motion';
 
 export default function Footer() {
+  const { theme } = useContext(TodoContext);
   return (
-    <footer className="mt-10 text-center text-sm text-gray-500">
+    <footer className={`text-center text-sm text-gray-500 ${theme === 'dark' ? 'bg-gray-300 text-dark' : 'bg-slate-800 text-white'}`}>
       <div className="flex flex-col items-center">
         <p>
           Created by{' '}

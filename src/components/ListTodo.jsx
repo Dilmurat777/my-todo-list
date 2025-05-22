@@ -40,7 +40,7 @@ export default function ListTodo() {
               <div className="flex flex-row gap-2">
                 {editingId === todo.id ? (
                   <input
-                    className={`w-[300px] outline-none ${
+                    className={`w-full outline-none ${
                       theme === 'light' ? 'text-black' : 'text-white bg-dark'
                     }`}
                     type="text"

@@ -14,7 +14,7 @@ export default function App() {
   const { theme } = useContext(TodoContext);
 
   return (
-    <div className={`App ${theme === 'light' ? 'bg-white' : 'bg-dark text-textWhite'}`}>
+    <div className={`App h-[90vh] ${theme === 'light' ? 'bg-white' : 'bg-dark text-textWhite'}`}>
       <div
         className={`container max-w-3xl mx-auto px-4 flex flex-col items-center relative h-full`}>
         <motion.h1
