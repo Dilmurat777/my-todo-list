@@ -3,6 +3,7 @@ import { TodoContext } from '../context/createContext';
 import { useContext, useState } from 'react';
 import NoFind from '../assets/find.png';
 import toast from 'react-hot-toast';
+import StatusIcon from './StatusIcon';
 
 export default function ListTodo() {
   const [editingId, setEditingId] = useState(null);
@@ -29,7 +30,7 @@ export default function ListTodo() {
   };
 
   return (
-    <div className="w-[525px] mt-5">
+    <div className="sm:w-[525px] w-full mt-5">
       {filteredTodos.length > 0 ? (
         <ul className="flex flex-col gap-5 mt-3 w-full">
           {filteredTodos.map((todo) => (
@@ -54,7 +55,7 @@ export default function ListTodo() {
               </div>
               <div className="flex flex-row gap-2">
                 <button onClick={() => toggleStatus(todo.id)}>
-                  <p>{todo.status}</p>
+                  <StatusIcon status={todo.status} />
                 </button>
                 {editingId === todo.id ? (
                   <button onClick={() => handleSave(todo.id)}>Save</button>

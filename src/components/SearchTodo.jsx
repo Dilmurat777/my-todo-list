@@ -7,7 +7,7 @@ export default function SearchTodo() {
   const { searchTodo, handleSearch } = useContext(TodoContext);
   return (
     <div
-      className={`w-[500px] border rounded-lg flex items-center px-2 ${
+      className={`sm:w-[500px]  border rounded-lg flex items-center px-2 ${
         theme === 'dark' ? 'border-white' : 'border-primary'
       }`}>
       <input

@@ -22,6 +22,7 @@ export const TodoProvider = (props) => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
+
   {
     /* useEffect: Переключение темы & сохранение todos в localStorage */
   }
