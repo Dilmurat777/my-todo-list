@@ -32,7 +32,7 @@ export default function ListTodo() {
   return (
     <div className="sm:w-[525px] w-full mt-5">
       {filteredTodos.length > 0 ? (
-        <ul className="flex flex-col gap-5 mt-3 w-full max-h-[600px] overflow-x-hidden">
+        <ul className="flex flex-col gap-5 mt-3 w-full max-h-[450px] overflow-x-hidden">
           {filteredTodos.map((todo) => (
             <li
               key={todo.id}
