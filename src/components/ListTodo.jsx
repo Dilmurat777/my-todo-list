@@ -32,11 +32,11 @@ export default function ListTodo() {
   return (
     <div className="sm:w-[525px] w-full mt-5">
       {filteredTodos.length > 0 ? (
-        <ul className="flex flex-col gap-5 mt-3 w-full">
+        <ul className="flex flex-col gap-5 mt-3 w-full max-h-[600px] overflow-x-hidden">
           {filteredTodos.map((todo) => (
             <li
               key={todo.id}
-              className="flex flex-row gap-2 items-center justify-between w-full border-b-primary border-b-2 p-2 hover:scale-105 transition-all duration-100">
+              className="flex flex-row gap-2 items-center justify-between w-full border-b-primary border-b-2 p-2">
               <div className="flex flex-row gap-2">
                 {editingId === todo.id ? (
                   <input
@@ -65,7 +65,7 @@ export default function ListTodo() {
                       setEditingId(todo.id);
                       setEditedTitle(todo.title);
                     }}>
-                    <Pencil className="cursor-pointer text-light-gray hover:text-primary hover:transform hover:scale-105 duration-100" />
+                    <Pencil className="cursor-pointer text-light-gray hover:text-primary" />
                   </button>
                 )}
                 <button
@@ -73,7 +73,7 @@ export default function ListTodo() {
                     deleteTodo(todo.id);
                     toast.success('Задача удалена!');
                   }}>
-                  <Trash2 className="cursor-pointer text-light-gray hover:text-red-700 hover:transform hover:scale-105 duration-100" />
+                  <Trash2 className="cursor-pointer text-light-gray hover:text-red-700" />
                 </button>
               </div>
             </li>
